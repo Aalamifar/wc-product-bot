@@ -1,0 +1,26 @@
+<!-- wp:heading -->
+<h2>BIOS file for {brand} {model} {board_no} {capacity}</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This is a BIOS file for the <strong>{brand} {model}</strong> laptop, for motherboard <strong>{board_no} Rev:{rev}</strong>, for a BIOS chip with a capacity of <strong>{capacity}</strong>. The file is provided in {format} format for direct programming with a compatible programmer.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Specifications</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul>
+<li>Brand: {brand}</li>
+<li>Model: {model}</li>
+<li>Board number: {board_no}</li>
+<li>REV: {rev}</li>
+<li>Capacity: {capacity}</li>
+<li>Format: {format}</li>
+</ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Before purchasing, make sure the board number, REV and chip capacity above match your device exactly — the laptop model alone is not enough to guarantee compatibility.</p>
+<!-- /wp:paragraph -->

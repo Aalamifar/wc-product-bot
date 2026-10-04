@@ -1,0 +1,1 @@
+BIOS file for {brand} {model} laptop {board_no} {capacity}

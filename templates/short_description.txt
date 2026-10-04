@@ -1,0 +1,9 @@
+<!-- wp:list -->
+<ul>
+<li>Board number: {board_no}</li>
+<li>REV: {rev}</li>
+<li>File size: {capacity}</li>
+<li>File type: {format}</li>
+<li>Instant download</li>
+</ul>
+<!-- /wp:list -->
