@@ -74,7 +74,12 @@ python wc_product_bot.py --config config.ini
 
 The script skips rows whose status column already equals `done_value`
 in your config, so re-running it only processes new rows. Failed rows
-are marked with `error_value` so you can find and retry them.
+are marked with `error_value` and will be retried on the next run unless
+you change their status. Keep a backup of your spreadsheet before a bulk run.
+The status column prevents repeat creation only after a successful response
+has been saved; it is not a server-side idempotency guarantee. If a network
+failure happens after WooCommerce creates a product but before the script
+receives the response, inspect the store before retrying that row.
 
 ## How a product is built
 
@@ -103,9 +108,13 @@ new product manually before publishing.
 **`403 Forbidden` on every request, even with a correct key:**
 Some hosts and security plugins (Wordfence and similar) block requests
 whose `Authorization` header or default `python-requests` User-Agent
-look bot-like. This script already works around both by sending the key
-as a query parameter and a normal browser User-Agent
-(see the `[request]` section in your config). If you still get 403:
+look bot-like. This script currently sends the consumer key and secret
+as query parameters and uses a configurable User-Agent (see the
+`[request]` section in your config). Query-string credentials can be
+recorded in server, proxy, or monitoring logs, so use this workaround
+only with a trusted HTTPS endpoint and protect access to those logs.
+If your hosting environment supports HTTP Basic authentication reliably,
+prefer switching the client to `requests` authentication instead. If you still get 403:
 
 - Confirm the key's permission is **Read/Write**, not Read-only.
 - Confirm the key's associated user has an Administrator or Shop
@@ -122,6 +131,16 @@ separate blocks:** your WordPress version may not auto-convert the
 `<!-- wp:... -->` comments on import. The content and formatting on the
 live page are unaffected either way — it only affects how it looks if
 you reopen it in the block editor.
+
+## Development
+
+Run the automated unit tests with:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+GitHub Actions runs these tests on pushes and pull requests.
 
 ## License
 
